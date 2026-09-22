@@ -38,6 +38,7 @@ public class ClusterTlsIdentityTests(ITestOutputHelper log)
         var config = server.GetClientConfig(defaultOnly: true);
         config.EndPoints.Clear();
         config.EndPoints.Add(new DnsEndPoint(Hostname, port));
+
         await using var conn = await ConnectionMultiplexer.ConnectAsync(config);
         var db = conn.GetDatabase();
         await db.StringSetAsync("tls-identity", "ok");
